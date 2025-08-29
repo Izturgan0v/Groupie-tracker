@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Groupie Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Limelight&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="icon" href="/static/favicon/Image.png">
+</head>
+<body>
+  <nav>
+    <a href="/" style="text-decoration: none; color: inherit;"><h1 class="main-title">Groupie Tracker</h1></a>
+  </nav>
+
+  <main>
+    <section id="bands">
+      <p class="band-count">Now Showing: <span id="bandCount">{{if .IsSingleArtist}}1{{else}}{{len .Artists}}{{end}}</span> Headliners</p>
+      <div id="bandCards">
+        {{if .IsSingleArtist}}
+          <a class="band-card-link" href="/artist/{{.Artist.ID}}" data-id="{{.Artist.ID}}">
+            <div class="band-card">
+              <div class="band-header">
+                <img src="{{.Artist.Image}}" alt="{{.Artist.Name}}" onerror="this.onerror=null;this.src='https://placehold.co/300x300/1f2937/e5e7eb?text=No+Photo';">
+                <div class="band-name-overlay">
+                  <h2>{{.Artist.Name}}</h2>
+                </div>
+              </div>
+            </div>
+          </a>
+        {{else}}
+          {{range .Artists}}
+            <a class="band-card-link" href="/artist/{{.ID}}" data-id="{{.ID}}">
+              <div class="band-card">
+                <div class="band-header">
+                  <img src="{{.Image}}" alt="{{.Name}}" onerror="this.onerror=null;this.src='https://placehold.co/300x300/1f2937/e5e7eb?text=No+Photo';">
+                  <div class="band-name-overlay">
+                    <h2>{{.Name}}</h2>
+                  </div>
+                </div>
+              </div>
+            </a>
+          {{end}}
+        {{end}}
+      </div>
+    </section>
+  </main>
+
+  <!-- Модальное окно для отображения информации о группе -->
+  <div id="bandModal">
+    <div class="modal-content">
+      <span class="modal-close">&times;</span>
+      <div id="modalBody"></div>
+    </div>
+  </div>
+
+  <script src="/static/scripts.js"></script>
+</body>
+</html>
