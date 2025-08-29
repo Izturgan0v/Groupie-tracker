@@ -1,0 +1,327 @@
+@import url('https://fonts.googleapis.com/css2?family=Limelight&display=swap');
+
+body, h1, h2, h3, h4, h5, h6, p, a, span, div, button, input, label, nav, main, section, article, ul, ol, li {
+  font-family: 'Limelight', sans-serif !important;
+  color: #fff !important;
+}
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #0f172a;
+  background-image: url('https://www.transparenttextures.com/patterns/black-mamba.png');
+  background-repeat: repeat;
+  color: #e5e7eb;
+  line-height: 1.6;
+}
+
+/* Навигационная панель */
+nav {
+  background: transparent;
+  padding: 2rem;
+  text-align: center;
+  border-bottom: 2px solid #30363d;
+}
+
+.main-title {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 4rem;
+  color: #e5e7eb;
+  text-shadow: 0 0 8px rgba(0,0,0,0.6);
+  letter-spacing: 4px;
+}
+
+/* Заголовок секции */
+.band-count {
+  margin: 2rem;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 2rem;
+  color: #94a3b8;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+/* Адаптивная сетка для карточек групп */
+#bandCards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2.5rem;
+  padding: 0 2rem 3rem;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+/* Стили карточек групп */
+.band-card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.band-card {
+  background: #1f2937;
+  border: 2px solid #334155;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(2, 132, 199, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.band-card:hover {
+  transform: translateY(-10px) rotate(360deg);
+  box-shadow: 0 0 20px rgba(59,130,246,0.35);
+}
+
+.band-header {
+    position: relative;
+}
+
+.band-header img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center;
+  filter: grayscale(80%) contrast(120%);
+  transition: filter 0.3s ease;
+  border: 4px solid #334155;
+}
+
+.band-card:hover .band-header img {
+    filter: grayscale(0%) contrast(100%);
+}
+
+.band-name-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+  padding: 2rem 1rem 1rem;
+}
+
+.band-name-overlay h2 {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 2.0rem;
+  color: #e5e7eb;
+  text-align: center;
+  letter-spacing: 2px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+}
+
+
+/* Стили модального окна */
+#bandModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#bandModal.show-modal {
+  display: flex;
+  opacity: 1;
+}
+
+.modal-content {
+  background: #111827;
+  border: 2px solid #334155;
+  border-radius: 8px;
+  max-width: 650px;
+  width: 100%;
+  padding: 2.5rem;
+  position: relative;
+  overflow-y: auto;
+  max-height: 90vh;
+  box-shadow: 0 0 30px rgba(0,0,0,0.6);
+  transform: scale(0.95);
+  transition: transform 0.3s ease;
+}
+
+#bandModal.show-modal .modal-content {
+    transform: scale(1);
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  font-size: 2.5rem;
+  line-height: 1;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: color 0.2s, text-shadow 0.2s;
+}
+
+.modal-close:hover {
+    color: #e5e7eb;
+    text-shadow: 0 0 8px rgba(0,0,0,0.6);
+}
+
+/* Стили содержимого модального окна */
+#modalBody {
+    text-align: center;
+}
+#modalBody img {
+  width: 100%;
+  max-width: 200px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  margin: 0 auto 1.5rem;
+  display: block;
+  border-radius: 50%;
+  border: 4px solid #334155;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+}
+
+#modalBody h2 {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 3.5rem;
+  margin-bottom: 2rem;
+  color: #e5e7eb;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+
+#modalBody p {
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  text-align: left;
+  color: #ccc;
+}
+#modalBody p strong {
+    color: #93c5fd;
+    font-weight: 700;
+}
+
+#modalBody h3 {
+  font-family: 'Bebas Neue', cursive;
+  margin-top: 2.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 2.2rem;
+  color: #93c5fd;
+  text-align: left;
+  border-bottom: 2px solid #334155;
+  padding-bottom: 0.5rem;
+  letter-spacing: 1px;
+}
+
+/* Визуализация временной шкалы концертов */
+#concertList {
+  list-style: none;
+  padding: 0;
+  margin-top: 1.5rem;
+  position: relative;
+  text-align: left;
+}
+
+#concertList::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 10px;
+    bottom: 10px;
+    width: 3px;
+    background-image: linear-gradient(#334155, #64748b);
+}
+
+#concertList li {
+  padding: 10px 15px 10px 35px;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+#concertList li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: #64748b;
+  border: 4px solid #1a1a1a;
+  z-index: 1;
+  box-shadow: 0 0 10px rgba(0,0,0,0.4);
+}
+
+.concert-date {
+  font-weight: 700;
+  color: #f0f0f0;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.concert-location {
+  color: #cbd5e1;
+}
+
+/* Стили страницы ошибки */
+.error-container {
+    text-align: center;
+    padding: 4rem 2rem;
+    max-width: 600px;
+    margin: 2rem auto;
+    background: #1f2937;
+    border: 2px solid #334155;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+.error-container h2 {
+    font-family: 'Bebas Neue', cursive;
+    font-size: 4rem;
+    color: #e5e7eb;
+}
+.error-container p {
+    font-size: 1.1rem;
+    margin: 1rem 0 2rem;
+    color: #f0f0f0;
+}
+.home-link {
+    font-family: 'Bebas Neue', cursive;
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    background: #334155;
+    color: #e5e7eb;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background 0.3s, color 0.3s, transform 0.3s;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+}
+.home-link:hover {
+    background: #475569;
+    color: #ffffff;
+    transform: scale(1.05);
+}
+
+/* Поисковая и фильтрующая форма */
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem 0 1rem 0;
+}
+
+/* Медиа-запросы */
+@media (max-width: 600px) {
+  .main-title { font-size: 3rem; }
+  #bandCards {
+    grid-template-columns: 1fr;
+    padding: 0 1rem 1rem;
+  }
+}
